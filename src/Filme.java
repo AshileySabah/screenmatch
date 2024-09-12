@@ -2,8 +2,8 @@ public class Filme {
     String nome;
     int anoDeLancamento;
     boolean inclusoNoPlano;
-    double totalAvaliacoes;
-    int totalDeAvaliacoes;
+    private int totalDeAvaliacoes;
+    private double somaDasAvaliacoes;
     int duracaoEmMinutos;
 
     void exibirFichaTecnica(){
@@ -12,6 +12,15 @@ public class Filme {
     }
 
     void avaliar(double nota){
-        totalAvaliacoes += nota;
+        somaDasAvaliacoes += nota;
+        totalDeAvaliacoes++;
+    }
+
+    double pegarMedia(){
+        return somaDasAvaliacoes/totalDeAvaliacoes;
+    }
+
+    int pegarTotalDeAvaliacoes(){
+        return totalDeAvaliacoes;
     }
 }
