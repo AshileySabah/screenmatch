@@ -1,3 +1,5 @@
+import br.com.alura.screenmatch.modelos.Filme;
+
 public class Principal {
     public static void main(String[] args) {
         Filme filme = new Filme();
@@ -12,6 +14,5 @@ public class Principal {
         filme.avaliar(9.2);
 
         System.out.println("Total de avaliações: " + filme.pegarTotalDeAvaliacoes());
-
     }
 }
