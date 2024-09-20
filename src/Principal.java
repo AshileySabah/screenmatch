@@ -1,18 +1,10 @@
-import br.com.alura.screenmatch.modelos.Filme;
+import br.com.alura.screenmatch.modelos.Serie;
 
 public class Principal {
     public static void main(String[] args) {
-        Filme filme = new Filme();
-        filme.setNome("O Poderoso Chefão");
-        filme.setAnoDeLancamento(1970);
-        filme.setInclusoNoPlano(true);
-        filme.setDuracaoEmMinutos(180);
-
-        filme.exibirFichaTecnica();
-
-        filme.avaliar(8.1);
-        filme.avaliar(9.2);
-
-        System.out.println("Total de avaliações: " + filme.getTotalDeAvaliacoes());
+        Serie lost = new Serie();
+        lost.setNome("Lost");
+        lost.setTemporadas(19);
+        lost.exibirFichaTecnica();
     }
 }
