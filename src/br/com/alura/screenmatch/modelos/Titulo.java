@@ -24,6 +24,10 @@ public class Titulo {
     }
 
     // getters
+    public String getNome() {
+        return nome;
+    }
+
     public int getTotalDeAvaliacoes() {
         return totalDeAvaliacoes;
     }

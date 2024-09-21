@@ -3,6 +3,7 @@ import br.com.alura.screenmatch.calculos.FiltroRecomendacao;
 import br.com.alura.screenmatch.modelos.Episodio;
 import br.com.alura.screenmatch.modelos.Filme;
 import br.com.alura.screenmatch.modelos.Serie;
+import java.util.ArrayList;
 
 public class Principal {
     public static void main(String[] args) {
@@ -37,5 +38,14 @@ public class Principal {
 
         FiltroRecomendacao filtroEpsodio = new FiltroRecomendacao();
         filtroEpsodio.filtrar(episodio);
+
+        ArrayList<Filme> listaDeFilmes = new ArrayList<Filme>();
+        listaDeFilmes.add(filme1);
+        listaDeFilmes.add(filme2);
+        System.out.println(listaDeFilmes.size());
+
+        System.out.println("Primeiro filme: " + listaDeFilmes.get(0).getNome());
+        System.out.println("Segundo filme: " + listaDeFilmes.get(1).getNome());
+        System.out.println(listaDeFilmes);
     }
 }
