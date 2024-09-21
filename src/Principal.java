@@ -10,10 +10,12 @@ public class Principal {
         Filme filme1 = new Filme();
         filme1.setNome("O Poderoso Chefão");
         filme1.setDuracaoEmMinutos(120);
+        filme1.setAnoDeLancamento(2000);
 
         Filme filme2 = new Filme();
         filme2.setNome("Em busca da Felicidade");
         filme2.setDuracaoEmMinutos(90);
+        filme2.setAnoDeLancamento(2004);
 
         Serie serie1 = new Serie();
         serie1.setNome("Stranger Things");
