@@ -7,12 +7,13 @@ import java.util.ArrayList;
 
 public class Principal {
     public static void main(String[] args) {
-        Filme filme1 = new Filme("O Poderoso Chefão", 120, 200);
+        Filme filme1 = new Filme("O Poderoso Chefão", 120);
+        filme1.setAnoDeLancamento(2000);
 
-        Filme filme2 = new Filme("Em busca da Felicidade", 90, 2004);
+        Filme filme2 = new Filme("Em busca da Felicidade", 90);
+        filme1.setAnoDeLancamento(2004);
 
-        Serie serie1 = new Serie();
-        serie1.setNome("Stranger Things");
+        Serie serie1 = new Serie("Stranger Things", 2019);
         serie1.setTemporadas(4);
         serie1.setEpisodiosPorTemporada(8);
         serie1.setMinutosPorEpisodio(45);

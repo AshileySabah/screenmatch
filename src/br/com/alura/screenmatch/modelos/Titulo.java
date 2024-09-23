@@ -8,6 +8,12 @@ public class Titulo {
     private double somaDasAvaliacoes;
     private int duracaoEmMinutos;
 
+    // construtor
+    public Titulo(String nome, int anoDeLancamento) {
+        this.nome = nome;
+        this.anoDeLancamento = anoDeLancamento;
+    }
+
     // métodos
     public void exibirFichaTecnica(){
         System.out.println("Nome do filme: " + nome);
