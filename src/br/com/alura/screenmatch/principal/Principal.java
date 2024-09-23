@@ -1,3 +1,4 @@
+package br.com.alura.screenmatch.principal;
 import br.com.alura.screenmatch.calculos.CalculadoraDeTempo;
 import br.com.alura.screenmatch.calculos.FiltroRecomendacao;
 import br.com.alura.screenmatch.modelos.Episodio;
@@ -7,11 +8,9 @@ import java.util.ArrayList;
 
 public class Principal {
     public static void main(String[] args) {
-        Filme filme1 = new Filme("O Poderoso Chefão", 120);
-        filme1.setAnoDeLancamento(2000);
-
-        Filme filme2 = new Filme("Em busca da Felicidade", 90);
-        filme1.setAnoDeLancamento(2004);
+        Filme filme1 = new Filme("O Poderoso Chefão", 2002);
+        
+        Filme filme2 = new Filme("Em busca da Felicidade", 2004);
 
         Serie serie1 = new Serie("Stranger Things", 2019);
         serie1.setTemporadas(4);
