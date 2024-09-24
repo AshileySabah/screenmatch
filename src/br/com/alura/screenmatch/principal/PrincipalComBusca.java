@@ -22,29 +22,38 @@ public class PrincipalComBusca {
         String busca = scanner.nextLine();
 
         // Consumo
-        String endereco = "https://www.omdbapi.com/?t=" + busca + "&apikey=6585022c";
+        String endereco = "https://www.omdbapi.com/?t=" + busca.replace(" ", "+") + "&apikey=6585022c";
 
-        HttpClient client = HttpClient.newHttpClient();
+        try {
+            HttpClient client = HttpClient.newHttpClient();
 
-        HttpRequest request = HttpRequest.newBuilder()
-        .uri(URI.create(endereco))
-        .build();
+            HttpRequest request = HttpRequest.newBuilder()
+            .uri(URI.create(endereco))
+            .build();
 
-        HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
+            HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
 
-        // Manipular JSON
-        String json = response.body();
-        System.out.println(json);
+            // Manipular JSON
+            String json = response.body();
+            System.out.println(json);
 
-        Gson gson = new GsonBuilder()
-        .setFieldNamingPolicy(FieldNamingPolicy.UPPER_CAMEL_CASE)
-        .create();
+            Gson gson = new GsonBuilder()
+            .setFieldNamingPolicy(FieldNamingPolicy.UPPER_CAMEL_CASE)
+            .create();
 
-        TituloOmdb tituloOmbd = gson.fromJson(json, TituloOmdb.class);
-        System.out.println(tituloOmbd);
-        
-        Titulo titulo = new Titulo(tituloOmbd);
-        System.out.println(titulo);
+            TituloOmdb tituloOmbd = gson.fromJson(json, TituloOmdb.class);
+            System.out.println(tituloOmbd);
+            
+            Titulo titulo = new Titulo(tituloOmbd);
+            System.out.println(titulo);
+        } catch (NumberFormatException e) {
+            System.out.println("Aconteceu um erro: ");
+            System.out.println(e.getMessage());
+        } catch (IllegalArgumentException e) {
+            System.out.println("Houve um problema com o nome digitado, confira novamente.");
+        }
+
+        System.out.println("O programa finalizou.");
 
         scanner.close();
     }
