@@ -1,11 +1,14 @@
 package br.com.alura.screenmatch.principal;
 
+import java.io.FileWriter; 
 import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.io.IOException;
 import java.util.Scanner;
+import java.util.List;
+import java.util.ArrayList;
 
 import com.google.gson.FieldNamingPolicy;
 import com.google.gson.Gson;
@@ -17,44 +20,63 @@ import br.com.alura.screenmatch.modelos.TituloOmdb;
 
 public class PrincipalComBusca {
     public static void main (String[] args) throws IOException, InterruptedException {
-        // Entrada  busca título
         Scanner scanner = new Scanner(System.in);
-        System.out.println("Digite um filme para a busca: ");
-        String busca = scanner.nextLine();
+        String busca = "";
+        List<Titulo> titulos = new ArrayList<Titulo>();
+        
+        Gson gson = new GsonBuilder()
+        .setFieldNamingPolicy(FieldNamingPolicy.UPPER_CAMEL_CASE)
+        .setPrettyPrinting()
+        .create();
+        
+        while (!busca.equalsIgnoreCase("sair")) {
+            // Entrada  busca título
+            System.out.println("Digite um filme para a busca: ");
+            busca = scanner.nextLine();
 
-        // Consumo
-        String endereco = "https://www.omdbapi.com/?t=" + busca.replace(" ", "+") + "&apikey=6585022c";
+            if (busca.equalsIgnoreCase("sair")) {
+                break;
+            }
 
-        try {
-            HttpClient client = HttpClient.newHttpClient();
+            // Consumo
+            String endereco = "https://www.omdbapi.com/?t=" + busca.replace(" ", "+") + "&apikey=6585022c";
 
-            HttpRequest request = HttpRequest.newBuilder()
-            .uri(URI.create(endereco))
-            .build();
+            try {
+                HttpClient client = HttpClient.newHttpClient();
 
-            HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
+                HttpRequest request = HttpRequest.newBuilder()
+                .uri(URI.create(endereco))
+                .build();
 
-            // Manipular JSON
-            String json = response.body();
-            System.out.println(json);
+                HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
 
-            Gson gson = new GsonBuilder()
-            .setFieldNamingPolicy(FieldNamingPolicy.UPPER_CAMEL_CASE)
-            .create();
+                // Manipular JSON
+                String json = response.body();
+                System.out.println(json);
 
-            TituloOmdb tituloOmbd = gson.fromJson(json, TituloOmdb.class);
-            System.out.println(tituloOmbd);
-            
-            Titulo titulo = new Titulo(tituloOmbd);
-            System.out.println(titulo);
-        } catch (NumberFormatException e) {
-            System.out.println("Aconteceu um erro: ");
-            System.out.println(e.getMessage());
-        } catch (IllegalArgumentException e) {
-            System.out.println("Houve um problema com o nome digitado, confira novamente.");
-        } catch (ErroDeConversaoDeAnoException e) {
-            System.out.println(e.getMessage());
+                TituloOmdb tituloOmbd = gson.fromJson(json, TituloOmdb.class);
+                System.out.println(tituloOmbd);
+                
+                Titulo titulo = new Titulo(tituloOmbd);
+                System.out.println(titulo);
+
+                titulos.add(titulo);
+            } catch (NumberFormatException e) {
+                System.out.println("Aconteceu um erro: ");
+                System.out.println(e.getMessage());
+            } catch (IllegalArgumentException e) {
+                System.out.println("Houve um problema com o nome digitado, confira novamente.");
+            } catch (ErroDeConversaoDeAnoException e) {
+                System.out.println(e.getMessage());
+            }
         }
+
+        System.out.println(titulos);
+
+        // Criar Json do Títulos
+        FileWriter escrita = new FileWriter("filmes.json");
+        escrita.write(gson.toJson(titulos));
+        escrita.close();
 
         System.out.println("O programa finalizou.");
 
